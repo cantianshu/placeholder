@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>rem and scss - demo</title>
+
+<style type="text/css">
+  input{border:none; padding:0; margin:0;}
+
+  input{
+    height:26px;
+    line-height: 26px;
+    width:150px;
+    border:solid 1px #ccc;
+    margin-bottom: 15px;
+  }
+
+.pldtxt-wrap{
+  position: relative;
+  z-index: 1;
+  zoom:1px;
+}
+
+.placeholder-txt{
+  position: absolute;
+  top:0;
+  left:0;
+  color:#ccc;
+  font-size:14px;
+  /*z-index: -1;*/
+}
+
+</style>
+</head>
+<body>
+  <br/><br/><br/>
+
+  <input type="text" placeholder="文本输入框" />  <br/>
+
+  <input type="password" placeholder="密码输入框" /> <br/>
+
+  <input type="text" placeholder="文本输入框" />   <br/>
+
+  <input type="password" placeholder="密码输入框" />  <br/>
+
+    <input type="text" placeholder="文本输入框" />   <br/>
+
+</body>
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script> 
+  <!--
+  <script type="text/javascript" src="http://min.static.jiaju.com/static/site/asset/script/touch/zepto-min.js"></script>
+  -->
+  <script type="text/javascript" src="placeholder.js?1"></script>
+
+  <script type="text/javascript">
+    $(function () {
+        $('input').placeholder({height:26, left:5, isIE:false});
+    });
+
+  </script>
+
+</html>
