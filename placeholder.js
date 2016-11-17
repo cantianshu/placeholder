@@ -52,7 +52,9 @@ function Placeholder(allelem, handle, options, fn) {
 
 $.fn.placeholder = function(options, fn) {
     //如果配置 isIE:true, 则只有IE 起作用
-    if ( options && options.isIE && (navigator.userAgent.indexOf('MSIE') < 0) && (navigator.userAgent.indexOf('Opera') < 0)) { return false;}
+    var isPlaceholder = (function isPlaceholer(){ var input = document.createElement('input'); return 'placeholder' in input; })();
+    if (options && options.isIE && isPlaceholder){ return false;}
+    //if ( options && options.isIE && (navigator.userAgent.indexOf('MSIE') < 0) && (navigator.userAgent.indexOf('Opera') < 0)) { return false;}
 
     var el = this.data('fn-placeholder'), that = this;
         if (el) {return false;}
