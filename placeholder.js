@@ -4,11 +4,16 @@
   $.tools = $.tools || {version: '1.0'};
   $.tools.placeholder = {
           height:26,
-          left:5,
+          left:0,
           top:0,
+          right:'auto',
+          width:'auto',
+          textAlign:'left',
           isIE:true,//默认只有IE 执行
           wrapDom:'<div>',
-          textDom:'<label>'
+          textDom:'<label>',
+          wrapDomClass:'pldtxt-wrap',
+          textDomClass:'placeholder-txt'
   };
 
 function Placeholder(allelem, handle, options, fn) {
@@ -20,25 +25,25 @@ function Placeholder(allelem, handle, options, fn) {
             var t = self.attr('placeholder'),
                 $wrapDom = $(conf['wrapDom']),
                 $textDom = $(conf['textDom']);
-                $wrapDom.addClass('pldtxt-wrap').css({'height':conf.height+'px','*display':'inline','*zoom':'1px', 'visibility':'visible', 'position':'relative'});
-                $textDom.addClass('placeholder-txt').text(t).css({ 'height':conf.height+'px', 'lineHeight':conf.height+'px', 'left':conf.left+'px', 'position':'absolute' });
+                $wrapDom.addClass(conf.wrapDomClass).css({'height':conf.height+'px', 'width':conf.width+'px','*display':'inline','*zoom':'1px', 'visibility':'visible', 'position':'relative'});
+                $textDom.addClass(conf.textDomClass).text(t).css({ 'height':conf.height+'px','textAlign':conf.textAlign, 'lineHeight':conf.height+'px', 'width':conf.width+'px', 'left':conf.left+'px','right':conf.right+'px', 'position':'absolute' });
                 self.wrap( $wrapDom ).parent().append( $textDom );
                 self.attr('pld', t).removeAttr('placeholder');
           }
         });
 
     that.bind('propertychange input', function (event) {
-        if ( $(this).val() ) { $(this).parent().find('.placeholder-txt').hide(); }
+        if ( $(this).val() ) { $(this).parent().find('.'+conf.textDomClass).hide(); }
         return false;
     });
 
     that.bind('blur', function (event) {
         if ( $(this).val() ) { return false; }
-        $(this).parent().find('.placeholder-txt').text( $(this).attr('pld') ).show();
+        $(this).parent().find('.'+conf.textDomClass).text( $(this).attr('pld') ).show();
         return false;
     });
 
-    $('body').on('click','.placeholder-txt', function () {
+    $('body').on('click','.'+conf.textDomClass, function () {
         $(this).parent().find('input')[0].focus();
         return false;
     });
